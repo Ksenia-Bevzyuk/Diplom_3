@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import webDriver.WebDriverFactory;
+
 import java.util.Objects;
 import static org.junit.Assert.assertTrue;
 
@@ -37,7 +39,7 @@ public class SwitchConstructorTabTest {
     @Description
             ("Создание драйвера перед каждым тестом")
     public void start() {
-        driver = new ChromeDriver();
+        driver = WebDriverFactory.createWebDriver();
     }
 
     @Test
