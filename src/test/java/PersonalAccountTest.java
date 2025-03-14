@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import webDriver.WebDriverFactory;
+
 import static org.apache.http.HttpStatus.SC_ACCEPTED;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
@@ -54,7 +56,7 @@ public class PersonalAccountTest {
         ValidatableResponse response = client.createUser(user);
         accessToken = client.getAccessToken(response);
 
-        driver = new ChromeDriver();
+        driver = WebDriverFactory.createWebDriver();
 
         LoginPage objLoginPage = new LoginPage(driver);
         objLoginPage.open("Конструктор");
