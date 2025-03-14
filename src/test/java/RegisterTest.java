@@ -11,6 +11,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import webDriver.WebDriverFactory;
+
 import static constanceTest.DataUser.*;
 import static org.apache.http.HttpStatus.SC_ACCEPTED;
 import static org.junit.Assert.assertEquals;
@@ -47,7 +49,7 @@ public class RegisterTest {
     @DisplayName("Создание драйвера")
     @Description("Создание драйвера перед каждым тестом")
     public void start() {
-        driver = new ChromeDriver();
+        driver = WebDriverFactory.createWebDriver();
     }
 
     @Test
