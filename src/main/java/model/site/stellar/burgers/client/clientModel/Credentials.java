@@ -1,4 +1,4 @@
-package model.Stellar_Burgers.client.clientModel;
+package model.site.stellar.burgers.client.clientModel;
 
 import io.qameta.allure.internal.shadowed.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

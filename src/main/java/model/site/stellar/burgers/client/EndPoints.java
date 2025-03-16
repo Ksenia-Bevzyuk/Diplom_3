@@ -1,4 +1,4 @@
-package model.Stellar_Burgers.client;
+package model.site.stellar.burgers.client;
 
 public class EndPoints {
     public static final String CREATE_USER = "/api/auth/register";

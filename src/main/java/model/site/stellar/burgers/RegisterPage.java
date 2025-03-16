@@ -1,16 +1,30 @@
-package model.Stellar_Burgers;
+package model.site.stellar.burgers;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
-import static model.Stellar_Burgers.constanceModel.Login.LOGIN_BUTTON;
-import static model.Stellar_Burgers.constanceModel.Registration.*;
 
 public class RegisterPage {
+    private String STELLAR_BURGERS_REGISTER_URL =
+            "https://stellarburgers.nomoreparties.site/register";
+    private By NAME_AND_EMAIL_FIELD =
+            By.xpath(".//input[@name = 'name']");
+    private By PASS_FIELD =
+            By.xpath(".//input[@name = 'Пароль']");
+    private By REGISTER_BUTTON =
+            By.xpath(".//button[text() = 'Зарегистрироваться']");
+    private By ERROR_INCORRECT_PASS =
+            By.xpath(".//p[text()='Некорректный пароль']");
+    private By LOGIN_BUTTON_REGISTER =
+            By.className("Auth_link__1fOlj");
+    private By LOGIN_BUTTON =
+            By.xpath(".//button[text()='Войти']");
+
     private WebDriver driver;
 
     public RegisterPage(WebDriver driver) {
@@ -44,7 +58,7 @@ public class RegisterPage {
     @Step("Проверка успешности регистрации")
     public boolean isSuccessRegister() {
         WebElement isVisibleLoginFormSuccessRegister =
-                new WebDriverWait(driver, Duration.ofSeconds(1))
+                new WebDriverWait(driver, Duration.ofSeconds(3))
                         .until(ExpectedConditions
                                 .visibilityOfElementLocated(LOGIN_BUTTON));
         return isVisibleLoginFormSuccessRegister.isDisplayed();
@@ -59,6 +73,13 @@ public class RegisterPage {
         return isVisibleErrorPassField.isDisplayed();
     }
 
+    @Step("Клик по кнопке 'Войти' для перехода в форму входа в аккаунт")
+    public void clickToLoginButton() {
+        WebElement loginButton = driver.findElement(LOGIN_BUTTON_REGISTER);
+        loginButton.click();
+        new WebDriverWait(driver, Duration.ofSeconds(1))
+                .until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+    }
     @Step("Шаг: заполнение полей формы регистрации")
     public void setRegisterFields(String name, String email, String password) {
         setNameAndEmailFields(name, email);

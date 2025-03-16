@@ -1,14 +1,13 @@
-package model.Stellar_Burgers.client;
+package model.site.stellar.burgers.client;
 
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
-import model.Stellar_Burgers.client.clientModel.Credentials;
-import model.Stellar_Burgers.client.clientModel.User;
+import model.site.stellar.burgers.client.clientModel.Credentials;
+import model.site.stellar.burgers.client.clientModel.User;
 import static io.restassured.RestAssured.given;
-
 
 public class StellarBurgersClient {
     RequestSpecification requestSpec;

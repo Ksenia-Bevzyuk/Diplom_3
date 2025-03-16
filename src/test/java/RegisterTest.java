@@ -1,72 +1,63 @@
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
-import model.Stellar_Burgers.RegisterPage;
-import model.Stellar_Burgers.client.clientModel.Credentials;
-import model.Stellar_Burgers.client.StellarBurgersClient;
+import model.site.stellar.burgers.RegisterPage;
+import model.site.stellar.burgers.client.clientModel.Credentials;
+import model.site.stellar.burgers.client.StellarBurgersClient;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import webDriver.WebDriverFactory;
-
 import static constanceTest.DataUser.*;
 import static org.apache.http.HttpStatus.SC_ACCEPTED;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-
-@RunWith(Parameterized.class)
 public class RegisterTest {
     private WebDriver driver;
-    private boolean isVisionLoginButton;
-    private boolean isVisionErrorIncorrectPass;
+
     private String name;
     private String email;
-    private String password;
-
-    public RegisterTest(boolean isVisionLoginButton, boolean isVisionErrorIncorrectPass,
-                        String name, String email, String password) {
-        this.isVisionLoginButton = isVisionLoginButton;
-        this.isVisionErrorIncorrectPass = isVisionErrorIncorrectPass;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
-
-    @Parameterized.Parameters(name = "Данные для регистрации пользователя" +
-            "и проверки корректности ввода password: {0} {1}")
-    public static Object [][] data() {
-        return new Object[][] {
-                {true, false, generationName(), generationEmail(), generationCorrectPass()},
-                {false, true, generationName(), generationEmail(), generationIncorrectPass()}
-        };
-    }
+    RegisterPage objRegisterPage;
+    String correctPass;
 
     @Before
-    @DisplayName("Создание драйвера")
-    @Description("Создание драйвера перед каждым тестом")
+    @DisplayName("Создание драйвера, генерация name и email")
+    @Description("Создание драйвера, генерация name и email для регистрации пользователя" +
+            " перед каждым тестом")
     public void start() {
+        name = generationName();
+        email = generationEmail();
+
         driver = WebDriverFactory.createWebDriver();
     }
 
     @Test
-    @DisplayName("Проверка регистрации пользователя")
-    @Description("Проверка регистрации пользователя и отображения ошибки " +
-            "некорректного password")
-    public void registerTest() {
-        RegisterPage objRegisterPage = new RegisterPage(driver);
+    @DisplayName("Проверка успешной регистрации пользователя")
+    @Description("Проверка регистрации пользователя при вводе корректных данных")
+    public void registerSuccessTest() {
+        correctPass = generationCorrectPass();
+
+        objRegisterPage = new RegisterPage(driver);
         objRegisterPage.open();
-        objRegisterPage.setRegisterFields(name, email, password);
+        objRegisterPage.setRegisterFields(name, email, correctPass);
         objRegisterPage.clickToRegister();
-        if(isVisionLoginButton) {
-            assertEquals(isVisionLoginButton, objRegisterPage.isSuccessRegister());
-        } else {
-            assertEquals(isVisionErrorIncorrectPass,
-                    objRegisterPage.isVisionErrorInputIncorrectPass());
-        }
+
+        assertTrue(objRegisterPage.isSuccessRegister());
+    }
+
+    @Test
+    @DisplayName("Проверка отображения ошибки при регистрации пользователя")
+    @Description("Проверка отображения ошибки при вводе некорректного password")
+    public void registerErrorWithIncorrectPassTest() {
+        String incorrectPass = generationIncorrectPass();
+
+        objRegisterPage = new RegisterPage(driver);
+        objRegisterPage.open();
+        objRegisterPage.setRegisterFields(name, email, incorrectPass);
+        objRegisterPage.clickToRegister();
+
+        assertTrue(objRegisterPage.isVisionErrorInputIncorrectPass());
     }
 
     @After
@@ -74,9 +65,9 @@ public class RegisterTest {
     @Description("Удаление записей о пользователе и закрытие браузера после каждого теста")
     public void quitAndDeleteUser() {
         driver.quit();
-        if(isVisionLoginButton) {
+        if(correctPass != null) {
             StellarBurgersClient client = new StellarBurgersClient("");
-            ValidatableResponse response = client.loginUser(new Credentials(email, password));
+            ValidatableResponse response = client.loginUser(new Credentials(email, correctPass));
             String accessToken = client.getAccessToken(response);
 
             StellarBurgersClient clientForDelete = new StellarBurgersClient(accessToken);
