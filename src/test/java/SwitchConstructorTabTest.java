@@ -1,0 +1,60 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
+import model.site.stellar.burgers.ConstructorPage;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.openqa.selenium.WebDriver;
+import webDriver.WebDriverFactory;
+import java.util.Objects;
+import static org.junit.Assert.assertTrue;
+
+@RunWith(Parameterized.class)
+public class SwitchConstructorTabTest {
+    private WebDriver driver;
+
+    private String tab;
+
+    public SwitchConstructorTabTest(String tab) {
+        this.tab = tab;
+    }
+
+    @Parameterized.Parameters(name = "Локаторы для переключения вкладок: {0} {1} {2}")
+    public static Object [][] data() {
+        return new Object[][] {
+                {"Булки"},
+                {"Соусы"},
+                {"Начинки"}
+        };
+    }
+
+    @Before
+    @DisplayName("Создание драйвера")
+    @Description("Создание драйвера перед каждым тестом")
+    public void start() {
+        driver = WebDriverFactory.createWebDriver();
+    }
+
+    @Test
+    @DisplayName("Проверка перехода между вкладками")
+    @Description("Проверка перехода между вкладками ингредиентов конструктора")
+    public void checkSwitchingConstructorTab() {
+        ConstructorPage objConstructorPage = new ConstructorPage(driver);
+        objConstructorPage.open();
+        if (Objects.equals(tab, "Булки")) {
+            objConstructorPage.clickToTab("Начинки");
+        }
+        objConstructorPage.clickToTab(tab);
+
+        assertTrue(objConstructorPage.isTabSelected(tab));
+    }
+
+    @After
+    @DisplayName("Закрытие браузера")
+    @Description("Закрытие браузера после каждого теста")
+    public void quit() {
+        driver.quit();
+    }
+}
