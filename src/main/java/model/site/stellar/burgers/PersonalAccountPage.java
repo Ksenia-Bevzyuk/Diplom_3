@@ -9,15 +9,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class PersonalAccountPage {
-    private final By EXIT_BUTTON =
+    private static final By EXIT_BUTTON =
             By.xpath(".//button[text() = 'Выход']");
-    private final By LOGO =
+    private static final By LOGO =
             By.xpath(".//a[@href = '/']");
-    private final By CONSTRUCTOR =
+    private static final By CONSTRUCTOR =
             By.xpath(".//p[text() = 'Конструктор']");
-    private final By ORDER_BUTTON =
+    private static final By ORDER_BUTTON =
             By.xpath(".//button[text() = 'Оформить заказ']");
-    private final By LOGIN_BUTTON =
+    private static final By LOGIN_BUTTON =
             By.xpath(".//button[text()='Войти']");
 
     private WebDriver driver;

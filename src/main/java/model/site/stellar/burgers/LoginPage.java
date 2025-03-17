@@ -10,17 +10,17 @@ import java.time.Duration;
 
 public class LoginPage {
 
-    private By LOGIN_BUTTON =
+    private static final By LOGIN_BUTTON =
             By.xpath(".//button[text()='Войти']");
-    private By PERSONAL_ACCOUNT_BUTTON =
+    private static final By PERSONAL_ACCOUNT_BUTTON =
             By.xpath(".//p[text() = 'Личный Кабинет']");
-    private By EMAIL_FIELD =
+    private static final By EMAIL_FIELD =
             By.xpath(".//input[@name = 'name']");
-    private By PASS_FIELD =
+    private static final By PASS_FIELD =
             By.xpath(".//input[@name = 'Пароль']");
-    private final By EXIT_BUTTON =
+    private static final By EXIT_BUTTON =
             By.xpath(".//button[text() = 'Выход']");
-    private By BUNS_TAB =
+    private static final By BUNS_TAB =
             By.xpath(".//span[text() = 'Булки']");
 
     private WebDriver driver;

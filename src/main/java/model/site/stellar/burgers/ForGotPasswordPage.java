@@ -9,11 +9,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class ForGotPasswordPage {
-    private String STELLAR_BURGERS_FORGOT_PASS =
+    private static final String STELLAR_BURGERS_FORGOT_PASS =
             "https://stellarburgers.nomoreparties.site/forgot-password";
-    private By LOGIN_BUTTON_FOR_GOT_PASS =
+    private static final By LOGIN_BUTTON_FOR_GOT_PASS =
             By.className("Auth_link__1fOlj");
-    private By LOGIN_BUTTON =
+    private static final By LOGIN_BUTTON =
             By.xpath(".//button[text()='Войти']");
 
     private WebDriver driver;

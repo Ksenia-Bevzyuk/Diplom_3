@@ -8,19 +8,19 @@ import java.time.Duration;
 import java.util.Objects;
 
 public class ConstructorPage {
-    private String STELLAR_BURGERS_CONSTRUCTOR_URL =
+    private static final String STELLAR_BURGERS_CONSTRUCTOR_URL =
             "https://stellarburgers.nomoreparties.site";
-    private By LOGIN_BUTTON_CONSTRUCTOR =
+    private static final By LOGIN_BUTTON_CONSTRUCTOR =
             By.xpath(".//button[text() = 'Войти в аккаунт']");
-    private By PERSONAL_ACCOUNT_BUTTON =
+    private static final By PERSONAL_ACCOUNT_BUTTON =
             By.xpath(".//p[text() = 'Личный Кабинет']");
-    private By LOGIN_BUTTON =
+    private static final By LOGIN_BUTTON =
             By.xpath(".//button[text()='Войти']"); //
-    private By BUN =
+    private static final By BUN =
             By.xpath(".//span[text() = 'Булки']/parent::div");
-    private By SOUSE =
+    private static final By SOUSE =
             By.xpath(".//span[text() = 'Соусы']/parent::div");
-    private By FILLING =
+    private static final By FILLING =
             By.xpath(".//span[text() = 'Начинки']/parent::div");
 
     private WebDriver driver;

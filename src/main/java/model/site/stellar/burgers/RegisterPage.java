@@ -10,19 +10,19 @@ import java.time.Duration;
 import java.util.List;
 
 public class RegisterPage {
-    private String STELLAR_BURGERS_REGISTER_URL =
+    private static final String STELLAR_BURGERS_REGISTER_URL =
             "https://stellarburgers.nomoreparties.site/register";
-    private By NAME_AND_EMAIL_FIELD =
+    private static final By NAME_AND_EMAIL_FIELD =
             By.xpath(".//input[@name = 'name']");
-    private By PASS_FIELD =
+    private static final By PASS_FIELD =
             By.xpath(".//input[@name = 'Пароль']");
-    private By REGISTER_BUTTON =
+    private static final By REGISTER_BUTTON =
             By.xpath(".//button[text() = 'Зарегистрироваться']");
-    private By ERROR_INCORRECT_PASS =
+    private static final By ERROR_INCORRECT_PASS =
             By.xpath(".//p[text()='Некорректный пароль']");
-    private By LOGIN_BUTTON_REGISTER =
+    private static final By LOGIN_BUTTON_REGISTER =
             By.className("Auth_link__1fOlj");
-    private By LOGIN_BUTTON =
+    private static final By LOGIN_BUTTON =
             By.xpath(".//button[text()='Войти']");
 
     private WebDriver driver;
